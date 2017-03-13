@@ -1,2 +1,2 @@
 # AER-Algorithms
-Where I keep every algorithm I solved from www.aceptaelreto.com
+Where I store every algorithm I have solved from www.aceptaelreto.com
