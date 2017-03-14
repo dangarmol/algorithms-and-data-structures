@@ -10,31 +10,31 @@
 using namespace std;
 
 
-int comprobar(bool &correcto, bool &fin) {
+int check(bool &correct, bool &end) {
     int wr1, dr1, wl1, dl1;
     
     cin >> wr1 >> dr1 >> wl1 >> dl1;
     if(wr1 + dr1 + wl1 + dl1 == 0){
-        fin = true;
+        end = true;
         return -1;
     }
-    if (wr1 == 0) wr1 = comprobar(correcto, fin);
-    if (wl1 == 0) wl1 = comprobar(correcto, fin);
-    if (wr1 * dr1 != wl1 * dl1) correcto = false;
+    if (wr1 == 0) wr1 = check(correct, end);
+    if (wl1 == 0) wl1 = check(correct, end);
+    if (wr1 * dr1 != wl1 * dl1) correct = false;
     return wr1 + wl1;
 }
 
-bool resuelve() {
-    bool correcto = true;
-    bool fin = false;
-    comprobar(correcto, fin);
-    if(fin) return false;
-    if(correcto) cout << "SI" << '\n';
+bool solve() {
+    bool correct = true;
+    bool end = false;
+    check(correct, end);
+    if(end) return false;
+    if(correct) cout << "SI" << '\n';
     else cout << "NO" << '\n';
     return true;
 }
 
 int main() {
-    while(resuelve()) {}
+    while(solve()) {}
     return 0;
 }
