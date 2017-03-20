@@ -8,29 +8,48 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
-void getBestDays(const vector<int> &days, const size_t &min, const size_t &max) {
-    
+struct tDay {
+    int accWon;
+    size_t index;
+};
+
+bool operator< (tDay a, tDay b){
+    return a.accWon < b.accWon;
+}
+
+void getBestDays(const vector<tDay> &days) {
+    size_t start = 0, end = days.size();
+    bool found = false;
+    while (!found) {
+        if (days[start].index < days[end].index) {
+            found = true;
+        } else {
+            if (days[start + 1].accWon - days[start].accWon > days[end - 1].accWon - days[end].accWon) {
+                end--;
+            } else {
+                start++;
+            }
+        }
+    }
+    cout << "SOL: " << days[start].index << " " << days[end].index << endl;
 }
 
 void solve() {
-    size_t nDays, minIndex = 0, maxIndex = 0;
-    int aux = 0, minValue = 0, maxValue = 0;
+    size_t nDays;
     cin >> nDays;
-    vector<int> days(nDays);
-    for (size_t i = 0; i < nDays; ++i) {
-        cin >> days[i];
-        if (i != nDays - 1) days[i] += days[i - 1];
-        if (days[i] < minValue) {
-            minValue = days[i];
-            minIndex = i;
-        } else if (days[i] > maxValue) {
-            maxValue = days[i];
-            maxIndex = i;
-        }
+    vector<tDay> days(nDays + 1);
+    days[0].accWon = 0;
+    days[0].index = 0;
+    for (size_t i = 1; i <= nDays; ++i) {
+        cin >> days[i].accWon;
+        days[i].index = i;
+        days[i].accWon += days[i - 1].accWon;
     }
-    getBestDays(days, minIndex, maxIndex);
+    sort(days.begin(), days.end());
+    getBestDays(days);
 }
 
 int main() {
