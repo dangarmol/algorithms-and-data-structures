@@ -1,5 +1,4 @@
 //Daniel Garcia Molero
-//05297677H
 //Pto0512
 //Usuario juez "F38"
 //Todo funciona
